@@ -1,0 +1,83 @@
+﻿@page "/ViewDogs"
+@using Blazor.Service
+@using Blazor.Entity
+@inject IKennelService KennelService
+
+<h3>ViewDogs</h3>
+
+<MalesFemalesCountComponent />
+
+<div>
+    <label>Male: @maleCount</label><br/>
+    <label>Female: @femaleCount</label>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Dog</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var dog in Dogs)
+    {
+    <tr>
+        <td>
+            <img src="@dog.ImageUrl" alt="Dog Image" style="width: 150px; height: auto;" />
+        </td>
+        <td>
+            <button @onclick="@(() => ShowDogDetails(dog))">@dog.Name</button>
+            
+        </td>
+        
+    </tr>
+    }
+    </tbody>
+</table>
+
+@if (SelectedDog != null)
+{
+<div>
+    <div class="mt-4">
+        <h4>Details for @SelectedDog.Name</h4>
+        <p><strong>Breed:</strong> @SelectedDog.Breed</p>
+        <p><strong>Sex:</strong> @SelectedDog.Sex</p>
+        <p><strong>Description:</strong> @SelectedDog.Description</p>
+        <p><strong>Arrival Date:</strong> @SelectedDog.ArrivalDate.ToString("dd MMM yyyy")</p>
+        <img src="@SelectedDog.ImageUrl" alt="@SelectedDog.Name" style="width: 300px; height: auto;" />
+    </div>
+   
+</div>
+}
+
+@code {
+    private IEnumerable<Dog> Dogs;
+    private Dog? SelectedDog;
+    private int maleCount;
+    private int femaleCount;
+
+    protected override void OnInitialized()
+    {
+        Dogs = KennelService.GetAllDogs();
+        CountDogsByGender();
+    }
+
+    private void ShowDogDetails(Dog dog)
+    {
+        if (dog == null)
+        {
+            Console.WriteLine("Error: Dog is null.");
+            return;
+        }
+
+        Console.WriteLine($"Dog clicked: {dog.Name}");
+        SelectedDog = dog;
+    }
+
+    private void CountDogsByGender()
+    {
+        maleCount = Dogs.Count(dog => dog.Sex.Equals("Male", StringComparison.OrdinalIgnoreCase));
+        femaleCount = Dogs.Count(dog => dog.Sex.Equals("Female", StringComparison.OrdinalIgnoreCase));
+    }
+
+}

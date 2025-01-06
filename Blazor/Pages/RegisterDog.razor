@@ -1,0 +1,45 @@
+﻿@page "/RegisterDog"
+@using Blazor.Service
+@inject IKennelService KennelService
+@using Blazor.Entity
+
+<h3>Register Dog</h3>
+
+<label>Name:</label>
+<input @bind="Name" type="text"/>
+<label>Sex:</label>
+<input @bind="Sex" type="text"/>
+<label>Breed:</label>
+<input @bind="Breed" type="text"/>
+<label>Image Url:</label>
+<input @bind="ImageUrl" type="text"/>
+<label>Description:</label>
+<textarea @bind="Description"></textarea>
+<button @onclick="Register" class="btn btn-primary">Register Dog</button>
+<p>@message</p>
+
+@code {
+    private string? Name;
+    private string? Sex;
+    private string? Breed;
+    private string? ImageUrl;
+    private string? Description;
+    private string message = "";
+
+    private void Register()
+    
+    {
+        Console.WriteLine("Register button clicked.");
+        message = "Register button clicked."; 
+        var newDog = new Dog(0, Name, Sex, Breed, DateOnly.FromDateTime(DateTime.Now), Description, ImageUrl);
+        KennelService.AddDog(newDog);
+        message = "Dog was registered";
+        Console.WriteLine("New dog was registered.");
+        Name = "";
+        Sex = "";
+        Breed = "";
+        ImageUrl = "";
+        Description = "";
+    }
+
+}
