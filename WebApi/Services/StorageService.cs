@@ -2,7 +2,7 @@
 
 namespace WebApi.Services;
 
-public class StorageService:IStorageService
+public class StorageService : IStorageService
 {
     private readonly IList<StorageRoom> _storageRooms;
 
@@ -12,32 +12,34 @@ public class StorageService:IStorageService
         // Seed with at least five rooms and some boxes
         SeedStorageRooms();
     }
+
     public IList<StorageRoom> GetAllStorageRooms()
     {
         return _storageRooms;
     }
+
     public StorageRoom? GetStorageRoomById(int id)
     {
         return _storageRooms.FirstOrDefault(room => room.Id == id);
     }
+
     public void AddStorageRoom(StorageRoom room)
     {
         _storageRooms.Add(room);
     }
+
     public void AddBoxToRoom(int roomId, Box box)
     {
-        var storageRoom = GetStorageRoomById(roomId);//Kate: roomId used here
-        if (storageRoom == null)
-        {
-            throw new ArgumentException($"Room with ID {roomId} not found.");
-        }
+        var storageRoom = GetStorageRoomById(roomId); //Kate: roomId used here
+        if (storageRoom == null) throw new ArgumentException($"Room with ID {roomId} not found.");
         // KAte: it is according controller taskGenerate a new ID for the box
-        int newBoxId = storageRoom.Boxes.Any() ? storageRoom.Boxes.Max(b => b.Id) + 1 : 1;
+        var newBoxId = storageRoom.Boxes.Any() ? storageRoom.Boxes.Max(b => b.Id) + 1 : 1;
         box.Id = newBoxId; // Set the generated ID for the incoming box
-        
+
         //it is standart last line
         storageRoom.Boxes.Add(box);
     }
+
     private void SeedStorageRooms()
     {
         // Create some predefined Dimensions
@@ -57,5 +59,4 @@ public class StorageService:IStorageService
         _storageRooms.Add(new StorageRoom(4, "Row 5, Aisle 2", largeDimensions, new List<Box>()));
         _storageRooms.Add(new StorageRoom(5, "Row 7, Aisle 5", mediumDimensions, new List<Box> { box3 }));
     }
-
 }

@@ -1,7 +1,7 @@
 ﻿@page "/RegisterDog"
+@using Blazor.Entity
 @using Blazor.Service
 @inject IKennelService KennelService
-@using Blazor.Entity
 
 <h3>Register Dog</h3>
 
@@ -27,10 +27,10 @@
     private string message = "";
 
     private void Register()
-    
+
     {
         Console.WriteLine("Register button clicked.");
-        message = "Register button clicked."; 
+        message = "Register button clicked.";
         var newDog = new Dog(0, Name, Sex, Breed, DateOnly.FromDateTime(DateTime.Now), Description, ImageUrl);
         KennelService.AddDog(newDog);
         message = "Dog was registered";

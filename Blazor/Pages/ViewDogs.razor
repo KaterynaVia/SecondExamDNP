@@ -1,11 +1,11 @@
 ﻿@page "/ViewDogs"
-@using Blazor.Service
 @using Blazor.Entity
+@using Blazor.Service
 @inject IKennelService KennelService
 
 <h3>ViewDogs</h3>
 
-<MalesFemalesCountComponent />
+<MalesFemalesCountComponent/>
 
 <div>
     <label>Male: @maleCount</label><br/>
@@ -21,33 +21,41 @@
     <tbody>
     @foreach (var dog in Dogs)
     {
-    <tr>
-        <td>
-            <img src="@dog.ImageUrl" alt="Dog Image" style="width: 150px; height: auto;" />
-        </td>
-        <td>
-            <button @onclick="@(() => ShowDogDetails(dog))">@dog.Name</button>
-            
-        </td>
-        
-    </tr>
+        <tr>
+            <td>
+                <img src="@dog.ImageUrl" alt="Dog Image" style="width: 150px; height: auto;"/>
+            </td>
+            <td>
+                <button @onclick="@(() => ShowDogDetails(dog))">@dog.Name</button>
+
+            </td>
+
+        </tr>
     }
     </tbody>
 </table>
 
 @if (SelectedDog != null)
 {
-<div>
-    <div class="mt-4">
-        <h4>Details for @SelectedDog.Name</h4>
-        <p><strong>Breed:</strong> @SelectedDog.Breed</p>
-        <p><strong>Sex:</strong> @SelectedDog.Sex</p>
-        <p><strong>Description:</strong> @SelectedDog.Description</p>
-        <p><strong>Arrival Date:</strong> @SelectedDog.ArrivalDate.ToString("dd MMM yyyy")</p>
-        <img src="@SelectedDog.ImageUrl" alt="@SelectedDog.Name" style="width: 300px; height: auto;" />
+    <div>
+        <div class="mt-4">
+            <h4>Details for @SelectedDog.Name</h4>
+            <p>
+                <strong>Breed:</strong> @SelectedDog.Breed
+            </p>
+            <p>
+                <strong>Sex:</strong> @SelectedDog.Sex
+            </p>
+            <p>
+                <strong>Description:</strong> @SelectedDog.Description
+            </p>
+            <p>
+                <strong>Arrival Date:</strong> @SelectedDog.ArrivalDate.ToString("dd MMM yyyy")
+            </p>
+            <img src="@SelectedDog.ImageUrl" alt="@SelectedDog.Name" style="width: 300px; height: auto;"/>
+        </div>
+
     </div>
-   
-</div>
 }
 
 @code {
