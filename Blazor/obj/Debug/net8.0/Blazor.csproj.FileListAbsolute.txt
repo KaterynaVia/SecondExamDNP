@@ -1029,3 +1029,4 @@ C:\Users\cathe\riderProjects\Check Blazor\Blazor\obj\Debug\net8.0\Blazor.dll
 C:\Users\cathe\riderProjects\Check Blazor\Blazor\obj\Debug\net8.0\refint\Blazor.dll
 C:\Users\cathe\riderProjects\Check Blazor\Blazor\obj\Debug\net8.0\Blazor.pdb
 C:\Users\cathe\riderProjects\Check Blazor\Blazor\obj\Debug\net8.0\ref\Blazor.dll
+C:\Users\cathe\riderProjects\Check Blazor\Blazor\obj\Debug\net8.0\Blazor.sourcelink.json
