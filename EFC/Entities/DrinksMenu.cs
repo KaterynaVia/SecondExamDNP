@@ -7,7 +7,7 @@ public class DrinksMenu
     [Key]
     public int DrinksMenuId { get; set; }
     [Required]
-    public string Name { get; set; }
+    public string Name { get; set; }= string.Empty;
     public bool ContainsAlcohol { get; set; }
     
     [DataType(DataType.Time)]
